@@ -3,75 +3,145 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Портфолио — Unity-разработчик</title>
+<title>Мои работы — Виктор Климович, Unity-разработчик</title>
+<meta name="description" content="Видео-демонстрации проектов Unity-разработчика: процедурная генерация, воксели, WFC, разрушения.">
+<meta property="og:title" content="Мои работы — Виктор Климович, Unity-разработчик">
+<meta property="og:description" content="Видео-демонстрации проектов и резюме Unity-разработчика.">
 <style>
-  :root { --bg: #f6f7f9; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #101216; } }
+  :root { --bg:#f6f7f9; --text:#15181d; --muted:#5b6472; --line:#d9dde3; --card:#ffffff; --accent:#3a6df0; --accent-bg:#eaf0ff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#101216; --text:#eef0f3; --muted:#9aa3b2; --line:#2a2f38; --card:#181b21; --accent:#7a9bff; --accent-bg:#18213a; }
+  }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
+  body { margin:0; background:var(--bg); color:var(--text);
+         font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  a { color:var(--accent); }
+  .wrap { max-width:1100px; margin:0 auto; padding:28px 16px 56px; }
+  h1 { margin:0 0 4px; font-size:clamp(1.6rem,4.5vw,2.3rem); line-height:1.2; }
+  .sub { margin:0 0 18px; color:var(--muted); }
+  .label { margin:18px 0 8px; font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .links { display:flex; flex-wrap:wrap; gap:10px; }
+  .links a { display:inline-block; padding:8px 14px; border:1px solid var(--line); border-radius:999px;
+             background:var(--card); color:var(--text); text-decoration:none; font-weight:500; font-size:.95rem; }
+  .links a:hover { border-color:var(--accent); color:var(--accent); }
+  .big { display:block; margin:6px 0 4px; padding:20px 22px; border:2px solid var(--accent); border-radius:14px;
+         background:var(--accent-bg); color:var(--text); text-decoration:none; }
+  .big:hover { filter:brightness(1.05); }
+  .big .t { display:block; font-size:1.3rem; font-weight:700; }
+  .big .d { display:block; margin-top:2px; color:var(--muted); }
+  .big .go { display:inline-block; margin-top:10px; font-weight:600; color:var(--accent); }
 
-  /* Телефон — 1 ролик в ряд, планшет/ноутбук — 2 ролика в ряд */
-  .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-  @media (min-width: 700px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-
-  .player { position: relative; aspect-ratio: 16 / 9; background: #000; border-radius: 10px; overflow: hidden; }
-  .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  header { margin-bottom:22px; }
+  .grid { display:grid; grid-template-columns:1fr; gap:16px; }
+  @media (min-width:700px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  .player { position:relative; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; }
+  .player iframe, .player video { position:absolute; inset:0; width:100%; height:100%; border:0; background:#000; }
+  .badge { position:absolute; top:8px; left:8px; z-index:5; padding:2px 9px; border-radius:6px;
+           background:#e5484d; color:#fff; font:700 14px/1.5 system-ui,sans-serif; pointer-events:none; }
 </style>
 </head>
 <body>
-<div class="wrap"><main class="grid" id="grid"></main></div>
+<div class="wrap">
+  <header>
+    <h1>Мои работы</h1>
+    <p class="sub">Виктор Климович · Unity-разработчик</p>
+
+    <a class="big" href="resume.html">
+      <span class="t">Резюме</span>
+      <span class="d">Unity-разработчик · Нижний Новгород · удалённо / гибрид</span>
+      <span class="go">Открыть резюме →</span>
+    </a>
+
+    <div class="label">Контакты</div>
+    <nav class="links">
+      <a href="https://t.me/ViktorKlimovich" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://github.com/MrWoxi" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:klimovichvita2005@gmail.com">klimovichvita2005@gmail.com</a>
+    </nav>
+  </header>
+
+  <main class="grid" id="grid"></main>
+</div>
 
 <script>
   /* ============================================================
-     СПИСОК РОЛИКОВ. Просто добавляй ссылки в массив (YouTube или VK Видео).
+     СПИСОК РОЛИКОВ. Добавляй ссылки в массив через запятую.
+     Поддерживается: YouTube, VK Видео, а также прямые файлы .mp4
+     (например "videos/demo1.mp4", если положишь их в репозиторий).
+     Проверка: открой страницу с ?debug в конце адреса — на роликах
+     появятся номера, по ним удобно найти и удалить нерабочие.
      ============================================================ */
   const VIDEOS = [
-    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "https://vk.com/video-22822305_456239018"
+    "https://vkvideo.ru/video-243094477_456239017",
+    "https://vkvideo.ru/video-243094477_456239018",
+    "https://vkvideo.ru/video-243094477_456239019",
+    "https://vkvideo.ru/video-243094477_456239020",
+    "https://vkvideo.ru/video-243094477_456239021",
+    "https://vkvideo.ru/video-243094477_456239022",
+    "https://vkvideo.ru/video-243094477_456239023",
+    "https://vkvideo.ru/video-243094477_456239024",
+    "https://vkvideo.ru/video-243094477_456239025",
+    "https://vkvideo.ru/video-243094477_456239026",
+    "https://vkvideo.ru/video-243094477_456239027",
+    "https://vkvideo.ru/video-243094477_456239028",
+    "https://vkvideo.ru/video-243094477_456239029",
+    "https://vkvideo.ru/video-243094477_456239030",
+    "https://vkvideo.ru/video-243094477_456239031",
+    "https://vkvideo.ru/video-243094477_456239032"
     // добавляй сюда остальные ролики через запятую
   ];
 
   function toEmbed(rawUrl) {
     let u;
-    try { u = new URL(rawUrl.trim()); } catch (e) { return null; }
+    try { u = new URL(rawUrl.trim(), location.href); } catch (e) { return null; }
     const host = u.hostname.replace(/^www\./, "").replace(/^m\./, "");
+    const yt = function (id) { return { type: "iframe", src: "https://www.youtube-nocookie.com/embed/" + id + "?rel=0&modestbranding=1" }; };
 
-    if (host === "youtu.be") {
-      const id = u.pathname.slice(1);
-      return id ? "https://www.youtube-nocookie.com/embed/" + id : null;
-    }
+    if (host === "youtu.be") { const id = u.pathname.slice(1); return id ? yt(id) : null; }
     if (host === "youtube.com" || host === "youtube-nocookie.com") {
       let id = u.searchParams.get("v");
       const m = u.pathname.match(/^\/(embed|shorts|live)\/([\w-]{6,})/);
       if (!id && m) id = m[2];
-      return id ? "https://www.youtube-nocookie.com/embed/" + id : null;
+      return id ? yt(id) : null;
     }
     if (["vk.com", "vk.ru", "vkvideo.ru"].includes(host)) {
-      if (u.pathname.includes("video_ext.php")) return u.href;
+      if (u.pathname.includes("video_ext.php")) return { type: "iframe", src: u.href };
       const src = u.pathname + " " + (u.searchParams.get("z") || "");
       const m = src.match(/video(-?\d+)_(\d+)/);
       if (m) {
         const hashQ = u.searchParams.get("hash") ? "&hash=" + u.searchParams.get("hash") : "";
-        return "https://vk.com/video_ext.php?oid=" + m[1] + "&id=" + m[2] + "&hd=2" + hashQ;
+        return { type: "iframe", src: "https://vk.com/video_ext.php?oid=" + m[1] + "&id=" + m[2] + "&hd=2" + hashQ };
       }
     }
+    if (/\.(mp4|webm)$/i.test(u.pathname)) return { type: "video", src: u.href };
     return null;
   }
 
+  const debug = /[?&]debug\b/.test(location.search);
   const grid = document.getElementById("grid");
-  VIDEOS.forEach(function (url) {
-    const embed = toEmbed(url);
-    if (!embed) { console.warn("Не удалось разобрать ссылку:", url); return; }
+
+  VIDEOS.forEach(function (url, i) {
+    const e = toEmbed(url);
+    if (!e) return;
     const box = document.createElement("div");
     box.className = "player";
-    const frame = document.createElement("iframe");
-    frame.src = embed;
-    frame.loading = "lazy";
-    frame.title = "Видео";
-    frame.allow = "autoplay; encrypted-media; fullscreen; picture-in-picture";
-    frame.allowFullscreen = true;
-    box.appendChild(frame);
+    let el;
+    if (e.type === "video") {
+      el = document.createElement("video");
+      el.src = e.src; el.controls = true; el.preload = "metadata"; el.playsInline = true;
+      el.addEventListener("error", function () { box.remove(); });
+    } else {
+      el = document.createElement("iframe");
+      el.src = e.src; el.loading = "lazy"; el.title = "Видео " + (i + 1);
+      el.allow = "autoplay; encrypted-media; fullscreen; picture-in-picture";
+      el.allowFullscreen = true;
+    }
+    box.appendChild(el);
+    if (debug) {
+      const b = document.createElement("div");
+      b.className = "badge"; b.textContent = "№ " + (i + 1);
+      box.appendChild(b);
+    }
     grid.appendChild(box);
   });
 </script>
